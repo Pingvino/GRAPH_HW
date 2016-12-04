@@ -1,0 +1,52 @@
+graph vertex insersion ok: A
+graph vertex insersion ok: B
+graph vertex insersion ok: C
+graph vertex insersion ok: D
+graph vertex insersion ok: E
+graph vertex insersion ok: F
+graph vertex insersion failed: C already exist
+
+Graph's Vertex:
+ - vertex: A
+ - vertex: B
+ - vertex: C
+ - vertex: D
+ - vertex: E
+ - vertex: F
+
+graph vertex delete ok: B
+
+Graph's Vertex:
+ - vertex: A
+ - vertex: C
+ - vertex: D
+ - vertex: E
+ - vertex: F
+
+to_vertex B: not found
+graph arc insertion failed: A -> B
+graph vertex insersion ok: B
+graph arc insertion ok: A -> B
+
+Graph's Arc:
+vertex: A
+         -> : B
+vertex: C
+         -> : B
+         -> : D
+         -> : E
+vertex: D
+         -> : C
+         -> : E
+vertex: E
+         -> : B
+         -> : C
+         -> : D
+         -> : F
+vertex: F
+         -> : E
+vertex: B
+         -> : A
+         -> : C
+         -> : E
+
