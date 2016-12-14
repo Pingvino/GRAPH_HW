@@ -178,26 +178,25 @@ void print_arc_all(GRAPH* graph){
 		}
 	}
 }
-//void destroy_graph(GRAPH* graph){
-//	printf("log1\n");
-//	VERTEX* temp_vertex;
-//	printf("log2\n");
-//	int vertex_temp_data;
-//	printf("log3\n");
-//	while(graph->vertex_list->count != 0) {
-//	printf("log4\n");
-//		temp_vertex = 
-//		(VERTEX*)get_data_at(graph->vertex_list,0);
-//	printf("log5\n");
-//		vertex_temp_data = temp_vertex->data;
-//	printf("%c\n", vertex_temp_data);
-//		if(!g_delete_vertex(graph, vertex_temp_data))
-//			printf("graph vertex delete failed: &c\n", vertex_temp_data);
-//	}
-//	printf("log8\n");
-//
-//	destroy_list(graph->vertex_list);
-//	printf("log9\n");
-//	free(graph);
-//	printf("log10\n");
-//}
+
+void destroy_graph(GRAPH* graph) {
+	while(graph->vertex_list->count != 0) {
+		VERTEX* v_temp = (VERTEX*)graph->vertex_list->front->data_ptr;
+
+		while(v_temp->arc_list->count != 0) {
+			ARC* arc_temp = (ARC*)v_temp->arc_list->front->data_ptr;
+			free(arc_temp);
+			del_node_at(v_temp->arc_list, 0);
+		}
+
+//		printf("\nlol\n");
+//		print_arc_all(graph);
+//		printf("\nlolol\n");
+		free(v_temp->arc_list);
+		free(v_temp);
+		del_node_at(graph->vertex_list, 0);
+	}
+
+	free(graph->vertex_list);
+	free(graph);
+}

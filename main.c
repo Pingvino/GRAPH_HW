@@ -71,5 +71,7 @@ int main() {
 	print_arc_all(graph);
 	printf("\n");
 
+	destroy_graph(graph);
+
 	return 0;
 }

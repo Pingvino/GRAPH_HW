@@ -38,4 +38,6 @@ bool insert_arc(GRAPH* graph, int from, int to);
 bool delete_arc(GRAPH* graph, int from, int to);
 void print_arc_all(GRAPH* graph);
 
+void destroy_graph(GRAPH* graph);
+
 #endif
