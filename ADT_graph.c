@@ -1,12 +1,6 @@
 #include"ADT_llist.h"
 #include"ADT_graph.h"
 
-GRAPH* create_graph(){
-	GRAPH* graph = (GRAPH*)malloc(sizeof(GRAPH));
-	graph->vertex_list = create_list(compare_vertex, print_vertex);
-	return graph;
-}
-
 // Inner Operations
 int compare_vertex(void* x, void* y){
 	VERTEX* left = (VERTEX*)x;
@@ -19,10 +13,10 @@ void print_vertex(void* x){
 	printf("vertex: %c\n", (char)vertex->data);
 }
 int compare_arc(void* x, void* y){
-	int* left = (int*)x;
+	ARC* left = (ARC*)x;
 	ARC* right = (ARC*)y;
 
-	return *left - right->to_vertex->data;
+	return compare_vertex(left->to_vertex, right->to_vertex);
 }
 void print_arc(void* x){
 	ARC* arc = (ARC*)x;
@@ -30,6 +24,12 @@ void print_arc(void* x){
 }
 
 // Operations
+GRAPH* create_graph(){
+	GRAPH* graph = (GRAPH*)malloc(sizeof(GRAPH));
+	graph->vertex_list = create_list(compare_vertex, print_vertex);
+	return graph;
+}
+
 bool g_insert_vertex(GRAPH* graph, int data){
 	int* datat = &data;
 	int vertex_loc = find_data(graph->vertex_list, datat);

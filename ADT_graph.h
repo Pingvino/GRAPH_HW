@@ -20,12 +20,6 @@ typedef struct {
 	LLIST* vertex_list;
 } GRAPH;
 
-// Inner Operations;
-int compare_vertex(void* x, void* y);
-void print_vertex(void* x);
-int compare_arc(void* x, void* y);
-void print_arc(void* x);
-
 // Operations;
 GRAPH* create_graph();
 bool g_insert_vertex(GRAPH* graph, int data);
