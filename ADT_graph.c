@@ -1,6 +1,12 @@
 #include"ADT_llist.h"
 #include"ADT_graph.h"
 
+GRAPH* create_graph(){
+	GRAPH* graph = (GRAPH*)malloc(sizeof(GRAPH));
+	graph->vertex_list = create_list(compare_vertex, print_vertex);
+	return graph;
+}
+
 // Inner Operations
 int compare_vertex(void* x, void* y){
 	VERTEX* left = (VERTEX*)x;
@@ -13,10 +19,10 @@ void print_vertex(void* x){
 	printf("vertex: %c\n", (char)vertex->data);
 }
 int compare_arc(void* x, void* y){
-	ARC* left = (ARC*)x;
+	int* left = (int*)x;
 	ARC* right = (ARC*)y;
 
-	return compare_vertex(left->to_vertex, right->to_vertex);
+	return *left - right->to_vertex->data;
 }
 void print_arc(void* x){
 	ARC* arc = (ARC*)x;
@@ -24,12 +30,6 @@ void print_arc(void* x){
 }
 
 // Operations
-GRAPH* create_graph(){
-	GRAPH* graph = (GRAPH*)malloc(sizeof(GRAPH));
-	graph->vertex_list = create_list(compare_vertex, print_vertex);
-	return graph;
-}
-
 bool g_insert_vertex(GRAPH* graph, int data){
 	int* datat = &data;
 	int vertex_loc = find_data(graph->vertex_list, datat);
@@ -63,7 +63,7 @@ bool g_delete_vertex(GRAPH* graph, int data){
 	destroy_list(temp_vertex->arc_list);
 
 	free(temp_vertex);
-	del_node_at(graph->vertex_list, vertex_loc);
+	return del_node_at(graph->vertex_list, vertex_loc);
 }
 void print_vertex_all(GRAPH* graph){
 	VERTEX* vertex_now;
